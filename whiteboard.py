@@ -24,10 +24,10 @@ eraser_path = os.path.join(current_dir, "eraser.png")
 eraser = PhotoImage(file=eraser_path)
 Button(root, image=eraser, bg="white", command=lambda: print("Eraser button clicked")).place(x=10, y=400)
 
-# # import button
-# import_path = os.path.join(current_dir, "eraser.png")
-# eraser = PhotoImage(file=eraser_path)
-# Button(root, image=eraser, bg="white", command=lambda: print("Eraser button clicked")).place(x=10, y=400)
+# import button
+import_path = os.path.join(current_dir, "eraser.png")
+eraser = PhotoImage(file=eraser_path)
+Button(root, image=eraser, bg="white", command=lambda: print("Eraser button clicked")).place(x=10, y=400)
 
 # main screen
 canvas = Canvas(root, width=930, height=500, background="white", cursor="hand2")
