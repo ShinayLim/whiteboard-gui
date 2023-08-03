@@ -33,7 +33,13 @@ def set_pen_color(event):
 colors.create_rectangle(10, 10, 30, 30, fill="black", tags=("black", "palette"))
 colors.create_rectangle(10, 40, 30, 60, fill="red", tags=("red", "palette"))
 colors.create_rectangle(10, 70, 30, 90, fill="green", tags=("green", "palette"))
-# Add more color rectangles as needed
+colors.create_rectangle(10, 100, 30, 120, fill="blue", tags=("blue", "palette"))
+colors.create_rectangle(10, 130, 30, 150, fill="yellow", tags=("yellow", "palette"))
+colors.create_rectangle(10, 160, 30, 180, fill="orange", tags=("orange", "palette"))
+colors.create_rectangle(10, 190, 30, 210, fill="purple", tags=("purple", "palette"))
+colors.create_rectangle(10, 220, 30, 240, fill="pink", tags=("pink", "palette"))
+colors.create_rectangle(10, 250, 30, 270, fill="brown", tags=("brown", "palette"))
+colors.create_rectangle(10, 280, 30, 300, fill="gray", tags=("gray", "palette"))
 
 colors.tag_bind("palette", '<Button-1>', set_pen_color)
 
