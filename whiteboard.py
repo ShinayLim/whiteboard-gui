@@ -17,11 +17,12 @@ root.iconphoto(False, image_icon)
 # sidebar
 sidebar_path = os.path.join(current_dir, "sidebar.png")
 color_box = PhotoImage(file=sidebar_path)
-Label(root, image=color_box, bg="#f2f3f5").grid(row=0, column=0, padx=10, pady=20)
+sidebar_label = Label(root, image=color_box, bg="#f2f3f5")
+sidebar_label.grid(row=0, column=0, padx=10, pady=20)
 
 # colors palette
-colors = Canvas(root, bg="#fff", width=37, height=300, bd=0)
-colors.grid(row=1, column=0, padx=10, pady=5)
+colors = Canvas(sidebar_label, bg="#fff", width=37, height=300, bd=0)
+colors.place(x=30, y=60)
 
 def show_color(event):
     color = colors.gettags(CURRENT)
