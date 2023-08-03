@@ -6,7 +6,7 @@ import os
 
 root = Tk()
 root.title("White Board")
-root.geometry("1200x700+200+200")
+root.geometry("1200x650")
 root.config(bg="#f2f3f5")
 root.resizable(False, False)
 
