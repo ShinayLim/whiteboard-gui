@@ -24,17 +24,18 @@ sidebar_label.grid(row=0, column=0, padx=10, pady=20)
 colors = Canvas(sidebar_label, bg="#fff", width=37, height=300, bd=0)
 colors.place(x=30, y=60)
 
-def show_color(event):
+def set_pen_color(event):
     color = colors.gettags(CURRENT)
     if color:
-        print("Selected color:", color[0])
+        global pen_color
+        pen_color = color[0]
 
 colors.create_rectangle(10, 10, 30, 30, fill="black", tags=("black", "palette"))
 colors.create_rectangle(10, 40, 30, 60, fill="red", tags=("red", "palette"))
 colors.create_rectangle(10, 70, 30, 90, fill="green", tags=("green", "palette"))
 # Add more color rectangles as needed
 
-colors.tag_bind("palette", '<Button-1>', show_color)
+colors.tag_bind("palette", '<Button-1>', set_pen_color)
 
 # Slider
 current_value = tk.DoubleVar()
@@ -64,6 +65,8 @@ canvas = Canvas(root, width=930, height=500, background="white", cursor="pencil"
 canvas.grid(row=0, column=1, rowspan=4, padx=10, pady=10)
 
 # Drawing functionality
+pen_color = "black"
+
 def start_drawing(event):
     canvas.x = event.x
     canvas.y = event.y
@@ -71,7 +74,7 @@ def start_drawing(event):
 def draw(event):
     x = event.x
     y = event.y
-    canvas.create_line(canvas.x, canvas.y, x, y, width=current_value.get())
+    canvas.create_line(canvas.x, canvas.y, x, y, width=current_value.get(), fill=pen_color)
     canvas.x = x
     canvas.y = y
 
