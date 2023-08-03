@@ -14,14 +14,8 @@ image_path = os.path.join(current_dir, "logo.png")
 image_icon = PhotoImage(file=image_path)
 root.iconphoto(False, image_icon)
 
-# sidebar
-sidebar_path = os.path.join(current_dir, "sidebar.png")
-color_box = PhotoImage(file=sidebar_path)
-sidebar_label = Label(root, image=color_box, bg="#f2f3f5")
-sidebar_label.grid(row=0, column=0, padx=10, pady=20)
-
 # colors palette
-colors = Canvas(sidebar_label, bg="#fff", width=37, height=300, bd=0)
+colors = Canvas(root, bg="#fff", width=37, height=300, bd=0)
 colors.place(x=30, y=60)
 
 def set_pen_color(event):
