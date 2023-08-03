@@ -1,10 +1,11 @@
 from tkinter import *
 import tkinter as tk
+from tkinter import filedialog
 import os
 
 root = Tk()
-root.title("White Board by ShinayLim")
-root.geometry("1200x550")
+root.title("White Board")
+root.geometry("1200x700+200+200")
 root.config(bg="#f2f3f5")
 root.resizable(False, False)
 
@@ -15,7 +16,7 @@ image_icon = PhotoImage(file=image_path)
 root.iconphoto(False, image_icon)
 
 # colors palette
-colors = Canvas(root, bg="#fff", width=37, height=300, bd=0)
+colors = Canvas(root, bg="#fff", width=37, height=400, bd=0)
 colors.grid(row=0, column=0, padx=10, pady=10)
 
 def set_pen_color(event):
@@ -34,6 +35,10 @@ colors.create_rectangle(10, 190, 30, 210, fill="purple", tags=("purple", "palett
 colors.create_rectangle(10, 220, 30, 240, fill="pink", tags=("pink", "palette"))
 colors.create_rectangle(10, 250, 30, 270, fill="brown", tags=("brown", "palette"))
 colors.create_rectangle(10, 280, 30, 300, fill="gray", tags=("gray", "palette"))
+colors.create_rectangle(10, 310, 30, 330, fill="cyan", tags=("cyan", "palette"))
+colors.create_rectangle(10, 340, 30, 360, fill="magenta", tags=("magenta", "palette"))
+colors.create_rectangle(10, 370, 30, 390, fill="indigo", tags=("indigo", "palette"))
+colors.create_rectangle(10, 430, 30, 450, fill="teal", tags=("teal", "palette"))
 
 colors.tag_bind("palette", '<Button-1>', set_pen_color)
 
@@ -43,12 +48,18 @@ eraser = PhotoImage(file=eraser_path)
 Button(root, image=eraser, bg="white", command=lambda: canvas.delete("all")).grid(row=1, column=0, padx=10, pady=5)
 
 # import button
+def import_image():
+    file_path = filedialog.askopenfilename(title="Select Image", filetypes=[("Image Files", "*.png;*.jpg;*.jpeg")])
+    if file_path:
+        # You can implement your logic to import and display the image here
+        print("Image file selected:", file_path)
+
 import_path = os.path.join(current_dir, "import.png")
 import_image = PhotoImage(file=import_path)
-Button(root, image=import_image, bg="white", command=lambda: print("Import button clicked")).grid(row=2, column=0, padx=10, pady=5)
+Button(root, image=import_image, bg="white", command=import_image).grid(row=2, column=0, padx=10, pady=5)
 
 # main screen
-canvas = Canvas(root, width=1100, height=500, background="white", cursor="pencil")
+canvas = Canvas(root, width=1100, height=600, background="white", cursor="pencil")
 canvas.grid(row=0, column=1, rowspan=4, padx=10, pady=10)
 
 # Slider
