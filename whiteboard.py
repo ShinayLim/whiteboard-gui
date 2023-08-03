@@ -5,7 +5,7 @@ from PIL import Image, ImageTk
 import os
 
 root = Tk()
-root.title("White Board")
+root.title("Whiteboard by ShinayLim")
 root.geometry("1200x650")
 root.config(bg="#f2f3f5")
 root.resizable(False, False)
