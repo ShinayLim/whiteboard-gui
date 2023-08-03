@@ -23,17 +23,17 @@ Label(root, image=color_box, bg="#f2f3f5").grid(row=0, column=0, padx=10, pady=2
 colors = Canvas(root, bg="#fff", width=37, height=300, bd=0)
 colors.grid(row=1, column=0, padx=10, pady=5)
 
-def show_color(color):
-    print("Selected color:", color)
+def show_color(event):
+    color = colors.gettags(CURRENT)
+    if color:
+        print("Selected color:", color[0])
 
-def display_palette():
-    colors.create_rectangle(10, 10, 30, 30, fill="black")
-    colors.create_rectangle(10, 40, 30, 60, fill="red")
-    colors.create_rectangle(10, 70, 30, 90, fill="green")
-    # Add more color rectangles as needed
-    colors.tag_bind("palette", '<Button-1>', lambda x: show_color(colors.gettags(CURRENT)))
+colors.create_rectangle(10, 10, 30, 30, fill="black", tags=("black", "palette"))
+colors.create_rectangle(10, 40, 30, 60, fill="red", tags=("red", "palette"))
+colors.create_rectangle(10, 70, 30, 90, fill="green", tags=("green", "palette"))
+# Add more color rectangles as needed
 
-display_palette()
+colors.tag_bind("palette", '<Button-1>', show_color)
 
 # eraser button
 eraser_path = os.path.join(current_dir, "eraser.png")
