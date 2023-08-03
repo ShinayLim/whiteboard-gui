@@ -3,8 +3,8 @@ import tkinter as tk
 import os
 
 root = Tk()
-root.title("White Board")
-root.geometry("1050x700+200+200")
+root.title("White Board by ShinayLim")
+root.geometry("1200x550")
 root.config(bg="#f2f3f5")
 root.resizable(False, False)
 
@@ -16,7 +16,7 @@ root.iconphoto(False, image_icon)
 
 # colors palette
 colors = Canvas(root, bg="#fff", width=37, height=300, bd=0)
-colors.place(x=30, y=60)
+colors.grid(row=0, column=0, padx=10, pady=10)
 
 def set_pen_color(event):
     color = colors.gettags(CURRENT)
@@ -37,6 +37,20 @@ colors.create_rectangle(10, 280, 30, 300, fill="gray", tags=("gray", "palette"))
 
 colors.tag_bind("palette", '<Button-1>', set_pen_color)
 
+# eraser button
+eraser_path = os.path.join(current_dir, "eraser.png")
+eraser = PhotoImage(file=eraser_path)
+Button(root, image=eraser, bg="white", command=lambda: canvas.delete("all")).grid(row=1, column=0, padx=10, pady=5)
+
+# import button
+import_path = os.path.join(current_dir, "import.png")
+import_image = PhotoImage(file=import_path)
+Button(root, image=import_image, bg="white", command=lambda: print("Import button clicked")).grid(row=2, column=0, padx=10, pady=5)
+
+# main screen
+canvas = Canvas(root, width=1100, height=500, background="white", cursor="pencil")
+canvas.grid(row=0, column=1, rowspan=4, padx=10, pady=10)
+
 # Slider
 current_value = tk.DoubleVar()
 def get_current_value():
@@ -45,24 +59,10 @@ def get_current_value():
 def slider_changed(event):
     value_label.config(text=get_current_value())
 
-slider = tk.Scale(root, from_=1, to=10, orient="horizontal", length=200, variable=current_value)
-slider.grid(row=4, column=0, padx=10, pady=5)
+slider = tk.Scale(root, from_=1, to=10, orient="horizontal", length=150, variable=current_value)
+slider.grid(row=3, column=0, padx=10, pady=5)
 value_label = Label(root, text=get_current_value(), bg="#f2f3f5")
-value_label.grid(row=4, column=1, padx=10, pady=5)
-
-# eraser button
-eraser_path = os.path.join(current_dir, "eraser.png")
-eraser = PhotoImage(file=eraser_path)
-Button(root, image=eraser, bg="white", command=lambda: canvas.delete("all")).grid(row=2, column=0, padx=10, pady=5)
-
-# import button
-import_path = os.path.join(current_dir, "import.png")
-import_image = PhotoImage(file=import_path)
-Button(root, image=import_image, bg="white", command=lambda: print("Import button clicked")).grid(row=3, column=0, padx=10, pady=5)
-
-# main screen
-canvas = Canvas(root, width=930, height=500, background="white", cursor="pencil")
-canvas.grid(row=0, column=1, rowspan=4, padx=10, pady=10)
+value_label.grid(row=3, column=1, padx=10, pady=5)
 
 # Drawing functionality
 pen_color = "black"
