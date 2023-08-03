@@ -25,7 +25,7 @@ This is a simple Whiteboard application built using Python and Tkinter, which al
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/ShinayLim/Whiteboard.git
+git clone https://github.com/ShinayLim/whiteboard-gui.git
 cd Whiteboard
 ```
 
