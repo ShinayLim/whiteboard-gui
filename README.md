@@ -45,9 +45,6 @@ python whiteboard.py
 
 2. The application window will open, and you can start drawing and using the various features available.
 
-## Screenshots
-
-(Optional: If you want to include some screenshots of your application, you can add them here.)
 
 ## License
 
