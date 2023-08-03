@@ -36,10 +36,23 @@ colors.create_rectangle(10, 70, 30, 90, fill="green", tags=("green", "palette"))
 
 colors.tag_bind("palette", '<Button-1>', show_color)
 
+# Slider
+current_value = tk.DoubleVar()
+def get_current_value():
+    return '{:.2f}'.format(current_value.get())
+
+def slider_changed(event):
+    value_label.config(text=get_current_value())
+
+slider = tk.Scale(root, from_=1, to=10, orient="horizontal", length=200, variable=current_value)
+slider.grid(row=4, column=0, padx=10, pady=5)
+value_label = Label(root, text=get_current_value(), bg="#f2f3f5")
+value_label.grid(row=4, column=1, padx=10, pady=5)
+
 # eraser button
 eraser_path = os.path.join(current_dir, "eraser.png")
 eraser = PhotoImage(file=eraser_path)
-Button(root, image=eraser, bg="white", command=lambda: print("Eraser button clicked")).grid(row=2, column=0, padx=10, pady=5)
+Button(root, image=eraser, bg="white", command=lambda: canvas.delete("all")).grid(row=2, column=0, padx=10, pady=5)
 
 # import button
 import_path = os.path.join(current_dir, "import.png")
@@ -47,7 +60,22 @@ import_image = PhotoImage(file=import_path)
 Button(root, image=import_image, bg="white", command=lambda: print("Import button clicked")).grid(row=3, column=0, padx=10, pady=5)
 
 # main screen
-canvas = Canvas(root, width=930, height=500, background="white", cursor="hand2")
+canvas = Canvas(root, width=930, height=500, background="white", cursor="pencil")
 canvas.grid(row=0, column=1, rowspan=4, padx=10, pady=10)
+
+# Drawing functionality
+def start_drawing(event):
+    canvas.x = event.x
+    canvas.y = event.y
+
+def draw(event):
+    x = event.x
+    y = event.y
+    canvas.create_line(canvas.x, canvas.y, x, y, width=current_value.get())
+    canvas.x = x
+    canvas.y = y
+
+canvas.bind("<Button-1>", start_drawing)
+canvas.bind("<B1-Motion>", draw)
 
 root.mainloop()
