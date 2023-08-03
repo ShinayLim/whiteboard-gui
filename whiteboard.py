@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter as tk
 from tkinter import filedialog
+from PIL import Image, ImageTk
 import os
 
 root = Tk()
@@ -48,15 +49,19 @@ eraser = PhotoImage(file=eraser_path)
 Button(root, image=eraser, bg="white", command=lambda: canvas.delete("all")).grid(row=1, column=0, padx=10, pady=5)
 
 # import button
-def import_image():
+def import_image_func():
     file_path = filedialog.askopenfilename(title="Select Image", filetypes=[("Image Files", "*.png;*.jpg;*.jpeg")])
     if file_path:
-        # You can implement your logic to import and display the image here
-        print("Image file selected:", file_path)
+        global imported_image
+        imported_image = Image.open(file_path)
+        imported_image = imported_image.resize((500, 500))  # You can adjust the size of the pasted image here
+        photo = ImageTk.PhotoImage(imported_image)
+        canvas.create_image(0, 0, anchor=NW, image=photo)
+        canvas.image = photo  # Keep a reference to the image to avoid garbage collection
 
 import_path = os.path.join(current_dir, "import.png")
 import_image = PhotoImage(file=import_path)
-Button(root, image=import_image, bg="white", command=import_image).grid(row=2, column=0, padx=10, pady=5)
+Button(root, image=import_image, bg="white", command=import_image_func).grid(row=2, column=0, padx=10, pady=5)
 
 # main screen
 canvas = Canvas(root, width=1100, height=600, background="white", cursor="pencil")
